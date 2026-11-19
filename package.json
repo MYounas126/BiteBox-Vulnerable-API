@@ -1,0 +1,20 @@
+{
+  "name": "bitebox-api-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bitebox: a deliberately vulnerable food delivery API for the Security Testing Boot Camp API module. Runs on 127.0.0.1 only.",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test tests/*.test.js",
+    "test:trainer": "node --disable-warning=ExperimentalWarning --test trainer/*.test.js",
+    "gen": "node --disable-warning=ExperimentalWarning scripts/generate-docs.js",
+    "flags": "node checker/check.js"
+  },
+  "engines": { "node": ">=22.13" },
+  "dependencies": {
+    "express": "^5.1.0",
+    "graphql": "^16.11.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

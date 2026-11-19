@@ -1,0 +1,9 @@
+node_modules
+.env
+
+# Local tooling state, not part of the lab.
+.claude/
+
+# Answer key. Deliberately kept out of this public repository.
+# See the "What is not in this repository" section of the README.
+trainer/

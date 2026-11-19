@@ -1,0 +1,9 @@
+node_modules
+trainer
+tests
+docs
+postman
+checker
+scripts
+.git
+.env

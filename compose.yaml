@@ -1,0 +1,37 @@
+# Every port is published on 127.0.0.1 only, so nothing is reachable from the network.
+# The API itself only ever connects to its own loopback and to the listener (src/outbound.js).
+name: bitebox-lab
+
+x-hardening: &hardening
+  restart: unless-stopped
+  read_only: true
+  tmpfs:
+    - /tmp
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  mem_limit: 512m
+  cpus: 1.0
+  pids_limit: 200
+
+services:
+  api:
+    <<: *hardening
+    build: .
+    image: bitebox-api:1.0
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8080"
+    environment:
+      LAB_LEVEL: ${LAB_LEVEL:-1}
+      SECURE: ${SECURE:-false}
+      FLAG_SEED: ${FLAG_SEED:-local-practice}
+      LISTENER_URL: http://listener:8081
+    depends_on:
+      - listener
+  listener:
+    <<: *hardening
+    build: ./listener
+    image: bitebox-listener:1.0
+    ports:
+      - "127.0.0.1:8081:8081"
